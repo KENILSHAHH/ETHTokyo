@@ -55,7 +55,9 @@ export default function Landing({ tokyo: Tokyo }) {
               </a>
             ))}
           </div>
-       <Connect/>
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <Connect />
+          </div>
         </nav>
         <Dialog
           as="div"

@@ -3,16 +3,16 @@
 import React from 'react';
 import Landing from './Landing';
 //
-import { PolybaseProvider } from '@polybase/react';
-import { Polybase } from '@polybase/client';
-import { Auth } from '@polybase/auth';
+// import { PolybaseProvider } from '@polybase/react';
+// import { Polybase } from '@polybase/client';
+// import { Auth } from '@polybase/auth';
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import CreateClub from './createClub';
 import Logo from './Logo';
 //
-const auth = new Auth();
-const polybase = new Polybase();
+// const auth = new Auth();
+// const polybase = new Polybase();
 export default function App() {
   return (
     // <CoffeeProvider>

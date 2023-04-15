@@ -2,7 +2,11 @@
 
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
+import Web3Modal from 'web3modal';
+import { ethers } from 'ethers';
+import abi from '../abi.json'
 export default function CreateClub() {
+    
   const [club, setClub] = useState('');
   return (
     <>
