@@ -10,24 +10,40 @@ import Landing from './Landing';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import CreateClub from './createClub';
 import Logo from './Logo';
+import JoinClubs from './joinClubs';
+import FundClubs from './fundClubs';
+import MyClubs from './myClubs';
 //
 // const auth = new Auth();
 // const polybase = new Polybase();
 export default function App() {
   return (
     // <CoffeeProvider>
-    
-        <Router>
-          <Routes>
-            <Route
-              path="/"
-              element={<Landing tokyo={Logo} />}
-            />
-            <Route
-              path="/createClub"
-              element={<Landing tokyo={CreateClub} />}
-            />
-            {/* <Route
+
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={<Landing tokyo={Logo} />}
+        />
+        <Route
+          path="/createClub"
+          element={<Landing tokyo={CreateClub} />}
+        />
+
+        <Route
+          path="/myClubs"
+          element={<Landing tokyo={MyClubs} />}
+        />
+        <Route
+          path="/joinClubs"
+          element={<Landing tokyo={JoinClubs} />}
+        />
+        <Route
+          path="/fundClubs"
+          element={<Landing tokyo={FundClubs} />}
+        />
+        {/* <Route
             path="/feature"
             element={<Landing logo={Elite} />}
           />
@@ -59,9 +75,8 @@ export default function App() {
             path="/myNFTs"
             element={<Landing logo={Cardd} />}
           /> */}
-          </Routes>
-        </Router>
-  
+      </Routes>
+    </Router>
 
     // {/* </CoffeeProvider> */}
     // <>

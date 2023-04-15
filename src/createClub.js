@@ -31,38 +31,41 @@ export default function CreateClub() {
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(
-      '0x3B759bA5b728075dCeE2B590E2Eebf5B8A73Cd5d',
+      '0x6389d42C9B655c62c759895BB56dABd79d32dA06',
       abi,
       signer
     );
 
     const tx = await contract.createClub(club, userName);
     console.log(tx);
-    navigate('/');
+    navigate('/joinClubs');
   }
 
   return (
     <>
-      <div className="card w-64 glass">
+      <div className="card w-200 glass">
         <figure>
           <img
             src={pigi}
             alt="car!"
-            style={{ width: '250px' }}
+            style={{ width: '700px', height: '400px' }}
           />
         </figure>
         <div className="card-body">
           <h2 className="card-title">Create Club</h2>
-          <p>How to park your car at your garage?</p>
-          <div className="card-actions justify-end">
-            <form onSubmit={handleSubmit}>
+          <p>Create A Club To Start Savings</p>
+          <div className="inline-flex card-actions">
+            <form
+              onSubmit={handleSubmit}
+              className="inline-flex">
               <input
                 type="text"
                 name="club"
                 value={formData.club}
                 onChange={handleInputChange}
-                placeholder="Club"
+                placeholder="Club Name"
                 className="input input-bordered input-primary w-full max-w-xs"
+                style={{ marginRight: '15px' }}
               />
               <input
                 type="text"
@@ -71,6 +74,7 @@ export default function CreateClub() {
                 onChange={handleInputChange}
                 placeholder="User Name"
                 className="input input-bordered input-primary w-full max-w-xs"
+                style={{ marginRight: '15px' }}
               />
               <button
                 type="submit"
