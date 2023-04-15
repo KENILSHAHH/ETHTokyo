@@ -3,34 +3,81 @@
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import Web3Modal from 'web3modal';
+import { useHistory } from 'react-router-dom';
 import { ethers } from 'ethers';
-import abi from '../abi.json'
+import abi from './abi.json';
+import pigi from './piggy.png';
+import { useNavigate } from 'react-router-dom';
+
 export default function CreateClub() {
-    
-  const [club, setClub] = useState('');
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    club: '',
+    userName: '',
+  });
+  const handleInputChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await createClub(formData.club, formData.userName);
+  };
+  async function createClub(club, userName) {
+    const web3Modal = new Web3Modal();
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      '0x3B759bA5b728075dCeE2B590E2Eebf5B8A73Cd5d',
+      abi,
+      signer
+    );
+
+    const tx = await contract.createClub(club, userName);
+    console.log(tx);
+    navigate('/');
+  }
+
   return (
     <>
-      <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div className="sm:col-span-4">
-          <label
-            htmlFor="username"
-            className="block text-sm font-medium leading-6 text-gray-900">
-            Username
-          </label>
-          <div className="mt-2">
-            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-              <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
-                workcation.com/
-              </span>
+      <div className="card w-64 glass">
+        <figure>
+          <img
+            src={pigi}
+            alt="car!"
+            style={{ width: '250px' }}
+          />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title">Create Club</h2>
+          <p>How to park your car at your garage?</p>
+          <div className="card-actions justify-end">
+            <form onSubmit={handleSubmit}>
               <input
                 type="text"
-                name="username"
-                id="username"
-                autoComplete="username"
-                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                placeholder="janesmith"
+                name="club"
+                value={formData.club}
+                onChange={handleInputChange}
+                placeholder="Club"
+                className="input input-bordered input-primary w-full max-w-xs"
               />
-            </div>
+              <input
+                type="text"
+                name="userName"
+                value={formData.userName}
+                onChange={handleInputChange}
+                placeholder="User Name"
+                className="input input-bordered input-primary w-full max-w-xs"
+              />
+              <button
+                type="submit"
+                className="btn btn-primary">
+                Create Club
+              </button>
+            </form>
           </div>
         </div>
       </div>
